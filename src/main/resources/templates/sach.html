@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sách</title>
+</head>
+<body>
+<a th:href="@{/sachs/sapxep}">Sắp Xếp</a>
+<form action="/sachs/add" method="post" th:object="${sach}">
+    <table>
+        <tr>
+            <td>Tên Sách</td>
+            <td><input type="text" th:field="*{tenSach}"></td>
+        </tr>
+        <tr>
+            <td>Giá</td>
+            <td>
+                <input type="text" th:field="*{gia}">
+                <div th:errors="*{gia}"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>Còn Hàng</td>
+            <td>
+                <input type="radio" th:field="*{conHang}" value="true">Còn
+                <input type="radio" th:field="*{conHang}" value="false">Hết
+            </td>
+        </tr>
+        <tr>
+            <td>Ngày Xuất Bản</td>
+            <td><input type="date" th:field="*{ngayXuatBan}" ></td>
+        </tr>
+        <tr>
+            <td>Nhà Xuất Bản</td>
+            <td>
+                <select th:field="*{nhaXuatBan.id}">
+                    <option th:each="nxb : ${listNhaXuatBans}" th:value="${nxb.id}" th:text="${nxb.tenNhaXuatBan}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add"></td>
+        </tr>
+    </table>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Ten Sách</th>
+        <th>Giá</th>
+        <th>Còn Hàng</th>
+        <th>Ngày Xuất Bản</th>
+        <th>Nhà Xuất Bản</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sach,index : ${listSachs}">
+        <td th:text="${index.index+1}"></td>
+        <td th:text="${sach.tenSach}"></td>
+        <td th:text="${sach.gia}"></td>
+        <td th:text="${sach.conHang} ? 'Còn':'Hết'"></td>
+        <td th:text="${sach.ngayXuatBan}"></td>
+        <td th:text="${sach.nhaXuatBan.tenNhaXuatBan}"></td>
+        <td>
+            <a th:href="@{/sachs/details/{id}(id=${sach.id})}">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
