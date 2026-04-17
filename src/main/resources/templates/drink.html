@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drink</title>
+</head>
+<body>
+<form method="post" action="/drinks/add" th:object="${drink}">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td><input type="text" th:field="*{price}"></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input type="text" th:field="*{description}"></td>
+        </tr>
+        <tr>
+            <td>Active</td>
+            <td>
+                <input type="radio" th:field="*{active}" value="true">Hoat Dong
+                <input type="radio" th:field="*{active}" value="false">Khong hoat dong
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select th:field="*{category.id}">
+                    <option th:each="category : ${listCategories}" th:value="${category.id}" th:text="${category.name}"></option>
+
+                </select>
+            </td>
+
+        </tr>
+        <td><input type="submit" value="Add"></td>
+    </table>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Description</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="drink,index : ${listDrinks}">
+        <td th:text="${index.index}"></td>
+        <td th:text="${drink.name}"></td>
+        <td th:text="${drink.price}"></td>
+        <td th:text="${drink.image}"></td>
+        <td th:text="${drink.description}"></td>
+        <td th:text="${drink.active ? 'Còn':'Hết'}"></td>
+        <td>
+        <a th:href="@{|/drinks/xoa?id=${drink.id}|}">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

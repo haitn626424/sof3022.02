@@ -12,13 +12,14 @@ import lombok.Setter;
 @Setter
 @Table(name = "bill_details")
 @Entity
-public class BillDetails {
+public class BillDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "quantity")
     private int quantity;
-
+    @Column(name = "price")
+    private int price;
     @ManyToOne
     @JoinColumn(name = "bill_id")
     private Bill bill;

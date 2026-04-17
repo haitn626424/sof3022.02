@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/categories/add" method="post" th:object="${category}">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Active</td>
+            <td>
+                <input type="radio" th:field="*{active}" value="true">hoat dong
+                <input type="radio" th:field="*{active}" value="false"> khong hoat dong
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add"></td>
+        </tr>
+    </table>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Name</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category , index : ${listCategories}">
+        <td th:text ="${index.index}"></td>
+        <td th:text ="${category.name}"></td>
+        <td th:text ="${category.active ? 'Con':'het'}"></td>
+        <td>
+        <a th:href="@{|/categories/xoa?id=${category.id}|}">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

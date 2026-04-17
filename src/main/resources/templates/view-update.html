@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View-Update</title>
+</head>
+<body>
+<form method="post" action="/hocsinhs/update" th:object="${hocSinh}">
+    <table>
+        <tr>
+            <td><input type="hidden" th:field="*{id}"></td>
+        </tr>
+        <tr>
+            <td>Họ Tên</td>
+            <td><input type="text" th:field="*{hoTen}"></td>
+        </tr>
+        <tr>
+            <td>Giới Tính</td>
+            <td>
+                <input type="radio" th:field="*{gioiTinh}" value="true">Nam
+                <input type="radio" th:field="*{gioiTinh}" value="false">Nữ
+            </td>
+        </tr>
+        <tr>
+            <td>Địa Chỉ</td>
+            <td>
+                <input type="text" th:field="*{diaChi}"></td>
+            </td>
+        </tr>
+        <tr>
+            <td>Ten Lớp Học</td>
+            <td>
+                <select th:field="*{lopHoc.id}">
+                    <option th:each="lopHoc : ${listLopHocs}" th:value="${lopHoc.id}" th:text="${lopHoc.tenLop}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

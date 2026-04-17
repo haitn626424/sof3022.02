@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/billdetails/add" method="post" th:object="${billDetail}">
+        <table>
+            <tr>
+                <td>Quantity</td>
+                <td><input type="text" th:field="*{quantity}"></td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td><input type="text" th:field="*{price}"></td>
+            </tr>
+            <tr>
+                <td>Bill Code</td>
+                <td>
+                    <select th:field="*{bill.id}">
+                        <option th:each="bill : ${listBills}" th:value="${bill.id}" th:text="${bill.code}"></option>
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Drink Name</td>
+                <td>
+                    <select th:field="*{drink.id}">
+                        <option th:each ="drink : ${listDrinks}" th:value="${drink.id}" th:text="${drink.name}"></option>
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Add"></td>
+            </tr>
+        </table>
+    </form>
+    <table>
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Bill_Code</th>
+        <th>Drink_Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="billDetail,index : ${listBillDetails}">
+        <td th:text="${index.index}"></td>
+        <td th:text="${billDetail.quantity}"></td>
+        <td th:text="${billDetail.price}"></td>
+        <td th:text="${billDetail.bill.code}"></td>
+        <td th:text="${billDetail.drink.name}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
